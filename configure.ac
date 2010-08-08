@@ -17,7 +17,7 @@ AC_PROG_CXX
 
 # Checks for libraries.
 PKG_CHECK_MODULES(UTENTI, [gtk+-2.0 >= 2.20.0
-                           libaute >= 0.0.2])
+                           libaute >= 0.1.0])
 
 AC_SUBST(UTENTI_CFLAGS)
 AC_SUBST(UTENTI_LIBS)

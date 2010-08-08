@@ -176,6 +176,16 @@ main (int argc, char **argv)
 
 	vbx_body_child = NULL;
 
+	GtkWidget *wgui = aute_get_management_gui (aute);
+	if (wgui != NULL)
+		{
+			utenti_set_vbx_body_child (wgui);
+		}
+	else
+		{
+			g_warning ("Impossibile avere il widget per la gestione utenti da parte del backend selezionato.");
+		}
+
 	gtk_widget_show (w);
 
 	gtk_main ();
