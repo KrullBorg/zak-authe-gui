@@ -1,7 +1,7 @@
 #                                               -*- Autoconf -*-
 # Process this file with autoconf to produce a configure script.
 
-AC_PREREQ(2.60)
+AC_PREREQ([2.65])
 AC_INIT([utenti], [0.0.1], [azagli@libero.it])
 AC_CONFIG_SRCDIR([src/main.c])
 AC_CONFIG_HEADER([config.h])
@@ -35,5 +35,8 @@ AC_CONFIG_FILES([
   data/Makefile
   data/utenti/Makefile
   data/utenti/gui/Makefile
+  doc/Makefile
+  doc/utenti/Makefile
+  doc/utenti/examples/Makefile
 ])
 AC_OUTPUT

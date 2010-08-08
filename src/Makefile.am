@@ -1,8 +1,10 @@
-gladedir = $(datadir)/utenti/glade
+guidir = $(datadir)/utenti/gui
+formdir = $(datadir)/utenti/form
 
 AM_CPPFLAGS = -I.. \
               $(UTENTI_CFLAGS) \
-              -DGLADEDIR=\""$(gladedir)"\"
+              -DGUIDIR=\""$(guidir)"\" \
+              -DFORMDIR=\""$(formdir)"\"
 
 LIBS = $(UTENTI_LIBS) \
        -export-dynamic
