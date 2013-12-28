@@ -2,7 +2,7 @@
 # Process this file with autoconf to produce a configure script.
 
 AC_PREREQ([2.65])
-AC_INIT([utenti], [0.0.1], [azagli@libero.it])
+AC_INIT([utenti], [0.0.3], [azagli@libero.it])
 AC_CONFIG_SRCDIR([src/main.c])
 AC_CONFIG_HEADER([config.h])
 
@@ -16,8 +16,8 @@ AC_PROG_CC
 AC_PROG_CXX
 
 # Checks for libraries.
-PKG_CHECK_MODULES(UTENTI, [gtk+-2.0 >= 2.20.0
-                           libaute >= 0.1.0])
+PKG_CHECK_MODULES(UTENTI, [gtk+-3.0 >= 3.0.0
+                           libaute >= 0.3.0])
 
 AC_SUBST(UTENTI_CFLAGS)
 AC_SUBST(UTENTI_LIBS)
