@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2010 Andrea Zagli <azagli@libero.it>
+ * Copyright (C) 2010-2015 Andrea Zagli <azagli@libero.it>
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -22,7 +22,7 @@
 
 #include <gtk/gtk.h>
 
-#include <libaute.h>
+#include <libzakauthe.h>
 
 static GtkBuilder *gtkbuilder;
 static gchar *guidir;
@@ -75,7 +75,7 @@ main (int argc, char **argv)
 {
 	GError *error;
 
-	Aute *aute;
+	ZakAuthe *aute;
 	gchar **aute_params;
 	gsize n_aute_params;
 	GSList *sl_aute_params;
@@ -119,12 +119,12 @@ main (int argc, char **argv)
 	g_strfreev (aute_params);
 
 	/* autenticazione */
-	aute = aute_new ();
-	aute_set_config (aute, sl_aute_params);
+	aute = zak_authe_new ();
+	zak_authe_set_config (aute, sl_aute_params);
 
 	while (TRUE)
 		{
-			utente = aute_autentica (aute);
+			utente = zak_authe_authe (aute);
 
 			if (utente == NULL)
 				{
@@ -132,7 +132,7 @@ main (int argc, char **argv)
 				}
 			else if (g_strcmp0 (utente, "") == 0)
 				{
-					return 0;				
+					return 0;
 				}
 			else
 				{
@@ -176,7 +176,7 @@ main (int argc, char **argv)
 
 	vbx_body_child = NULL;
 
-	GtkWidget *wgui = aute_get_management_gui (aute);
+	GtkWidget *wgui = zak_authe_get_management_gui (aute);
 	if (wgui != NULL)
 		{
 			utenti_set_vbx_body_child (wgui);
