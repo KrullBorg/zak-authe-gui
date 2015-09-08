@@ -1,14 +1,14 @@
-guidir = $(datadir)/utenti/gui
-formdir = $(datadir)/utenti/form
+guidir = $(datadir)/$(PKGNAME)/gui
+formdir = $(datadir)/$(PKGNAME)/form
 
 AM_CPPFLAGS = -I.. \
-              $(UTENTI_CFLAGS) \
+              $(ZAK_AUTHE_GUI_CFLAGS) \
               -DGUIDIR=\""$(guidir)"\" \
               -DFORMDIR=\""$(formdir)"\"
 
-LIBS = $(UTENTI_LIBS) \
+LIBS = $(ZAK_AUTHE_GUI_LIBS) \
        -export-dynamic
 
-bin_PROGRAMS = utenti
+bin_PROGRAMS = zak-authe-gui
 
-utenti_SOURCES = main.c
+zak_authe_gui_SOURCES = main.c

@@ -1,1 +1,1 @@
-SUBDIRS = utenti
+SUBDIRS = zak-authe-gui

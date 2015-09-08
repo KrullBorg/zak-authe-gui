@@ -4,13 +4,13 @@
 srcdir=`dirname $0`
 test -z "$srcdir" && srcdir=.
 
-PKG_NAME="utenti"
+PKG_NAME="zak-authe-gui"
 
 (test -f $srcdir/configure.ac \
   && test -d $srcdir/src \
   && test -f $srcdir/src/main.c) || {
     echo -n "**Error**: Directory "\`$srcdir\'" does not look like the"
-    echo " top-level utenti directory"
+    echo " top-level zak-authe-gui directory"
     exit 1
 }
 
