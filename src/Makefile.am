@@ -1,5 +1,5 @@
-guidir = $(datadir)/$(PKGNAME)/gui
-formdir = $(datadir)/$(PKGNAME)/form
+guidir = $(datadir)/$(PACKAGE)/gui
+formdir = $(datadir)/$(PACKAGE)/form
 
 AM_CPPFLAGS = -I.. \
               $(ZAK_AUTHE_GUI_CFLAGS) \

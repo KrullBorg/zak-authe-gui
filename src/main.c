@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2010-2015 Andrea Zagli <azagli@libero.it>
+ * Copyright (C) 2010-2016 Andrea Zagli <azagli@libero.it>
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -155,7 +155,7 @@ main (int argc, char **argv)
 
 #endif
 
-	guifile = g_build_filename (guidir, "utenti.gui", NULL);
+	guifile = g_build_filename (guidir, "zak-authe-gui.ui", NULL);
 
 	gtkbuilder = gtk_builder_new ();
 
