@@ -22,7 +22,7 @@
 
 #include <gtk/gtk.h>
 
-#include <libzakauthe.h>
+#include <libzakauthe/libzakauthe.h>
 
 static GtkBuilder *gtkbuilder;
 static gchar *guidir;
