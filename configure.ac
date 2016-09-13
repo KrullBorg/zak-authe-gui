@@ -20,7 +20,7 @@ AC_PROG_CXX
 
 # Checks for libraries.
 PKG_CHECK_MODULES(ZAK_AUTHE_GUI, [gtk+-3.0 >= 3.0.0
-                           libzakauthe >= 0.5.0])
+                           libzakauthe >= 0.5.99])
 
 AC_SUBST(ZAK_AUTHE_GUI_CFLAGS)
 AC_SUBST(ZAK_AUTHE_GUI_LIBS)

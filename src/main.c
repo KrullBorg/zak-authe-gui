@@ -82,8 +82,6 @@ main (int argc, char **argv)
 
 	gchar *utente;
 
-	gchar *cnc_string;
-
 	guint i;
 
 	gtk_init (&argc, &argv);
@@ -98,22 +96,24 @@ main (int argc, char **argv)
 	config = g_key_file_new ();
 	if (!g_key_file_load_from_file (config, argv[1], G_KEY_FILE_NONE, &error))
 		{
-			g_error ("Impossibile caricare il file di configurazione specificato: %s.", argv[1]);
+			g_error ("Impossibile caricare il file di configurazione specificato «%s»: %s.",
+					 argv[1], error != NULL && error->message != NULL ? error->message : "no details");
 		}
 
 	/* leggo i parametri per l'autenticazione */
 	error = NULL;
-	aute_params = g_key_file_get_keys (config, "AUTE", &n_aute_params, &error);
+	aute_params = g_key_file_get_keys (config, "ZAKAUTHE", &n_aute_params, &error);
 	if (aute_params == NULL)
 		{
-			g_error ("Impossibile leggere la configurazione per il sistema di autenticazione.");
+			g_error ("Impossibile leggere la configurazione per il sistema di autenticazione: %s.",
+					 error != NULL && error->message != NULL ? error->message : "no details");
 		}
 
 	sl_aute_params = NULL;
 	for (i = 0; i < n_aute_params; i++)
 		{
 			error = NULL;
-			sl_aute_params = g_slist_append (sl_aute_params, g_key_file_get_string (config, "AUTE", aute_params[i], &error));
+			sl_aute_params = g_slist_append (sl_aute_params, g_key_file_get_string (config, "ZAKAUTHE", aute_params[i], &error));
 		}
 
 	g_strfreev (aute_params);
