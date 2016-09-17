@@ -36,7 +36,7 @@ static GtkWidget *vbx_body;
 static GtkWidget *vbx_body_child;
 
 static void
-utenti_set_vbx_body_child (GtkWidget *child)
+zak_authe_gui_set_vbx_body_child (GtkWidget *child)
 {
 	if (GTK_IS_WIDGET (vbx_body_child))
 		{
@@ -49,7 +49,7 @@ utenti_set_vbx_body_child (GtkWidget *child)
 }
 
 G_MODULE_EXPORT void
-utenti_on_mnu_help_about_activate (GtkMenuItem *menuitem,
+zak_authe_gui_on_mnu_help_about_activate (GtkMenuItem *menuitem,
                             gpointer user_data)
 {
 	GError *error;
@@ -89,23 +89,23 @@ main (int argc, char **argv)
 	/* leggo la configurazione dal file */
 	if (argc == 1)
 		{
-			g_error ("Occorre passare a riga di comando il file di configurazione.");
+			g_error ("You need to provide the configuration file on command line.");
 		}
 
 	error = NULL;
 	config = g_key_file_new ();
 	if (!g_key_file_load_from_file (config, argv[1], G_KEY_FILE_NONE, &error))
 		{
-			g_error ("Impossibile caricare il file di configurazione specificato «%s»: %s.",
+			g_error ("Unable to load the provided configuration file «%s»: %s.",
 					 argv[1], error != NULL && error->message != NULL ? error->message : "no details");
 		}
 
-	/* leggo i parametri per l'autenticazione */
+	/* parameters for authetication */
 	error = NULL;
 	aute_params = g_key_file_get_keys (config, "ZAKAUTHE", &n_aute_params, &error);
 	if (aute_params == NULL)
 		{
-			g_error ("Impossibile leggere la configurazione per il sistema di autenticazione: %s.",
+			g_error ("Unable to read configuration for authentication system: %s.",
 					 error != NULL && error->message != NULL ? error->message : "no details");
 		}
 
@@ -118,7 +118,7 @@ main (int argc, char **argv)
 
 	g_strfreev (aute_params);
 
-	/* autenticazione */
+	/* authentication */
 	aute = zak_authe_new ();
 	zak_authe_set_config (aute, sl_aute_params);
 
@@ -128,7 +128,7 @@ main (int argc, char **argv)
 
 			if (utente == NULL)
 				{
-					g_warning ("Nome utente o password non validi.");
+					g_warning ("Wrong username or password.");
 				}
 			else if (g_strcmp0 (utente, "") == 0)
 				{
@@ -179,11 +179,11 @@ main (int argc, char **argv)
 	GtkWidget *wgui = zak_authe_get_management_gui (aute);
 	if (wgui != NULL)
 		{
-			utenti_set_vbx_body_child (wgui);
+			zak_authe_gui_set_vbx_body_child (wgui);
 		}
 	else
 		{
-			g_warning ("Impossibile avere il widget per la gestione utenti da parte del backend selezionato.");
+			g_warning ("Unable to get the GtkWidget for the users management from the selected libzakauthe plugin.");
 		}
 
 	gtk_widget_show (w);
