@@ -23,6 +23,7 @@
 #include <gtk/gtk.h>
 
 #include <libzakauthe/libzakauthe.h>
+#include <libzakconfi/libzakconfi.h>
 
 static GtkBuilder *gtkbuilder;
 static gchar *guidir;
@@ -75,6 +76,8 @@ main (int argc, char **argv)
 {
 	GError *error;
 
+	ZakConfi *confi;
+
 	ZakAuthe *aute;
 	gchar **aute_params;
 	gsize n_aute_params;
@@ -89,34 +92,18 @@ main (int argc, char **argv)
 	/* leggo la configurazione dal file */
 	if (argc == 1)
 		{
-			g_error ("You need to provide the configuration file on command line.");
+			g_error ("You need to provide the libzakconfi connection string on command line.");
 		}
 
-	error = NULL;
-	config = g_key_file_new ();
-	if (!g_key_file_load_from_file (config, argv[1], G_KEY_FILE_NONE, &error))
+	confi = zak_confi_new (argv[1]);
+	if (confi == NULL)
 		{
-			g_error ("Unable to load the provided configuration file «%s»: %s.",
-					 argv[1], error != NULL && error->message != NULL ? error->message : "no details");
+			g_error ("Unable to load the provided configuration file «%s».");
 		}
 
 	/* parameters for authetication */
-	error = NULL;
-	aute_params = g_key_file_get_keys (config, "ZAKAUTHE", &n_aute_params, &error);
-	if (aute_params == NULL)
-		{
-			g_error ("Unable to read configuration for authentication system: %s.",
-					 error != NULL && error->message != NULL ? error->message : "no details");
-		}
-
-	sl_aute_params = NULL;
-	for (i = 0; i < n_aute_params; i++)
-		{
-			error = NULL;
-			sl_aute_params = g_slist_append (sl_aute_params, g_key_file_get_string (config, "ZAKAUTHE", aute_params[i], &error));
-		}
-
-	g_strfreev (aute_params);
+	sl_aute_params = g_slist_append (sl_aute_params, "{libzakconfi}");
+	sl_aute_params = g_slist_append (sl_aute_params, confi);
 
 	/* authentication */
 	aute = zak_authe_new ();
